@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# rnrpi-update is not rpi-update !
+# A wrapper to rpi-update which tries to update firmware if applicable and
+# reboot immediately if update succeeds.
+# 
+# Copyright © 2014-2015 Mathias Bocquet (mbocquet@sekoya.org)
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+LOGFILE=$(tempfile) || exit 1
+
+# this one display the annoying download part
+rpi-update > $LOGFILE 2>&1
+
+# this one don't display the annoying download part
+rpi-update > $LOGFILE 2>/dev/null
+
+if pcregrep -Mq "successfully updated.*\n.*reboot is needed" $LOGFILE
+then
+	cat $LOGFILE
+	echo Rebooting...
+	reboot
+fi
+rm $LOGFILE
