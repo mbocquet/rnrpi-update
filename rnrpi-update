@@ -10,7 +10,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 LOGFILE=$(tempfile) || exit 1
 
 # this one display the annoying download part
-rpi-update > $LOGFILE 2>&1
+#rpi-update > $LOGFILE 2>&1
 
 # this one don't display the annoying download part
 rpi-update > $LOGFILE 2>/dev/null
