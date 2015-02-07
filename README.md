@@ -7,8 +7,10 @@ Place it in /usr/local/sbin for example and depending of the frequency you want 
 
 <code>
 cp rnrpi-update /usr/local/sbin/
+
 chmod +x /usr/local/sbin/rnrpi-update
 </code>
 
 Example to run rnrpi-install monthly :
+
 `ln -s /usr/local/sbin/rnrpi-update /etc/cron.monthly/`
