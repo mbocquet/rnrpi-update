@@ -5,11 +5,11 @@ rnrpi-update launches rpi-update and let it update the firmware if applicable. I
 
 Place it in /usr/local/sbin for example and depending of the frequency you want to run it, make a symlink in the right cron folder.
 
-<code>
+```shell
 cp rnrpi-update /usr/local/sbin/
+```
 
-chmod +x /usr/local/sbin/rnrpi-update
-</code>
+`chmod +x /usr/local/sbin/rnrpi-update`
 
 Example to run rnrpi-install monthly :
 
