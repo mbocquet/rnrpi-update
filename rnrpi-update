@@ -4,7 +4,7 @@
 # A wrapper to rpi-update which tries to update firmware if applicable and
 # reboot immediately if update succeeds.
 # 
-# Copyright © 2014-2015 Mathias Bocquet (mbocquet@sekoya.org)
+# Copyright © 2014-2017 Mathias Bocquet (mbocquet@sekoya.org)
 
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 LOGFILE=$(tempfile) || exit 1

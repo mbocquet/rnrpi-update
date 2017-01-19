@@ -11,6 +11,6 @@ chmod +x /usr/local/sbin/rnrpi-update
 </pre>
 
 
-Example to run rnrpi-install monthly :
+Example to run rnrpi-update monthly :
 
 `ln -s /usr/local/sbin/rnrpi-update /etc/cron.monthly/`
