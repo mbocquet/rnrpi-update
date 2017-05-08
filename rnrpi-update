@@ -19,7 +19,7 @@ case $? in
         reboot
         ;;
     *)
-        echo "rpi-update returned a non zero value which isn't handled (yet) by this script."
+        echo "rpi-update returned a non zero value ($?) which isn't handled (yet) by this script."
         echo "Check $LOGFILE"
         ;;
 esac
