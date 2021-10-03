@@ -3,18 +3,18 @@
 # rnrpi-update is not rpi-update !
 # A wrapper to rpi-update which tries to update firmware if applicable and
 # reboot immediately if update succeeds.
-# 
-# Copyright © 2014-2017 Mathias Bocquet (mbocquet@sekoya.org)
+#
+# Copyright © 2014-2021 Mathias Bocquet (mbocquet@sekoya.org)
 
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-LOGFILE=$(tempfile) || exit 1
+LOGFILE=$(mktemp) || exit 1
 
 do.rpi-update () {
-echo y|rpi-update >> $LOGFILE 2>/dev/null
+echo y|rpi-update >> "$LOGFILE" 2>/dev/null
 case $? in
     0)
         # Firmware was successfully updated
-        cat $LOGFILE
+        cat "$LOGFILE"
         echo Rebooting...
         reboot
         ;;
@@ -26,7 +26,7 @@ esac
 }
 
 # Check if an update is available
-JUST_CHECK=1 rpi-update > $LOGFILE
+JUST_CHECK=1 rpi-update > "$LOGFILE"
 case $? in
     0)
         # No firmware upgrade needed
