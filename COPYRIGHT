@@ -2,7 +2,7 @@
 A wrapper to rpi-update which tries to update firmware if applicable and reboot
 immediately if update succeeds.
 
-Copyright © 2014-2021 Mathias Bocquet (mbocquet@sekoya.org)
+Copyright © 2014-2023 Mathias BOCQUET (mbocquet@sekoya.org)
 
 This file is part of 'rnrpi-update'.
 
