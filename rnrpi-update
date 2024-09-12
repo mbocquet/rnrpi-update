@@ -4,36 +4,41 @@
 # A wrapper to rpi-update which tries to update firmware if applicable and
 # reboot immediately if update succeeds.
 #
-# Copyright © 2014-2023 Mathias BOCQUET (mbocquet@sekoya.org)
+# Copyright © 2014-2024 Mathias BOCQUET (mbocquet@sekoya.org)
 
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-LOGFILE=$(mktemp) || exit 1
+logfile=$(mktemp) || exit 1
 
-do.rpi-update () {
-echo y|rpi-update >> "$LOGFILE" 2>/dev/null
+do-rpi-update () {
+echo y|rpi-update >> "$logfile" 2>/dev/null
 case $? in
     0)
         # Firmware was successfully updated
-        cat "$LOGFILE"
+        cat "$logfile"
         echo Rebooting...
         reboot
         ;;
     *)
         echo "rpi-update returned a non zero value ($?) which isn't handled (yet) by this script."
-        echo "Check $LOGFILE"
+        echo "Check $logfile"
         ;;
 esac
 }
 
 # Check if an update is available
-JUST_CHECK=1 rpi-update > "$LOGFILE"
+JUST_CHECK=1 rpi-update > "$logfile" 2>&1
 case $? in
     0)
         # No firmware upgrade needed
         true
         ;;
+    1)
+        # Github API is rate limited
+        cat "$logfile"
+        return 1
+        ;;
     2)
         # A new firmware is available
-        do.rpi-update
+        do-rpi-update
         ;;
 esac
